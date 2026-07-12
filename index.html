@@ -184,10 +184,10 @@
   @media(max-width:600px){.day-media{grid-template-columns:1fr;}}
   .day-media figure{margin:0;}
   .day-media img{
-    width:100%;height:170px;object-fit:cover;border-radius:10px;display:block;background:var(--teal-tint);
+    width:100%;height:190px;object-fit:cover;border-radius:10px;display:block;background:var(--teal-tint);
   }
   .day-media iframe{
-    width:100%;height:170px;border:0;border-radius:10px;
+    width:100%;height:190px;border:0;border-radius:10px;
   }
   figcaption{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
   .maplink{
@@ -199,6 +199,14 @@
   }
 
   section.info{margin-top:52px;}
+  .overview{
+    margin-bottom:36px;
+  }
+  .overview h2{font-size:20px;margin-bottom:4px;}
+  .overview p.sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 12px;}
+  .overview iframe{
+    width:100%;height:360px;border:0;border-radius:var(--radius);border:1px solid var(--line);
+  }
   .info h2{font-size:22px;margin-bottom:14px;}
   .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   @media(max-width:600px){.card-grid{grid-template-columns:1fr;}}
@@ -249,6 +257,7 @@
 </nav>
 
 <main class="wrap" id="main">
+  <div id="overview"></div>
   <div id="days"></div>
 
   <section class="info">
@@ -295,6 +304,13 @@
 </footer>
 
 <script>
+const SJJ=[43.8598071,18.4312914], TRAVNIK=[44.2260825,17.6644834], JAJCE=[44.3378555,17.2703009],
+      MOSTAR=[43.3372866,17.815006], BLAGAJ=[43.2571787,17.90323], POCITELJ=[43.1343788,17.7318273],
+      KRAVICA=[43.15602,17.6081011], PLITVICE=[44.8653966,15.5820119], LJU=[46.047677,14.515132],
+      BLED=[46.363598,14.0938053], BOHINJ=[46.2840104,13.8594144], POSTOJNA=[45.7830298,14.2038417],
+      ZELENCI=[46.4925762,13.7377588];
+const FULL_ROUTE = [SJJ,TRAVNIK,JAJCE,MOSTAR,BLAGAJ,POCITELJ,KRAVICA,PLITVICE,LJU];
+
 const DAYS = [
   {n:1,date:"Fri 21 Aug",leg:"bosnia",icon:"✈",title:"Arrive Sarajevo",
    bullets:["Land at Sarajevo International, pick up the rental car.","Check in, settle the little one, evening stroll through Baščaršija (Old Bazaar).","Dinner: ćevapi at a Baščaršija grill house."],
@@ -307,47 +323,47 @@ const DAYS = [
    photo:null},
   {n:3,date:"Sun 23 Aug",leg:"bosnia",icon:"💧",title:"Sarajevo → Travnik → Jajce",
    bullets:["Drive north-west via Travnik (fortress town) to Jajce.","Jajce Waterfall — right in the town centre, no hike required.","Pliva Lakes watermills — short easy walk, very toddler-friendly.","Overnight in Jajce."],
-   lat:44.3378555,lng:17.2703009,cid:"14703862190480480944",
+   lat:44.3378555,lng:17.2703009,cid:"14703862190480480944",route:[SJJ,TRAVNIK,JAJCE],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZOXl2ksCeyZmKYQUftE9tUx5MiQRnODFhp-TJVtLclCq9nInaCDdqL3H13IYx5djyUKlPpqoiOAB6dX9ePSaHhe8nnMQ376e4fymiLZWzXCuy_q3VWa4umsq8xuxIhdChAKr23kL-wXPDQmqnw=w700-h500",
    caption:"Pliva Waterfall, Jajce"},
   {n:4,date:"Mon 24 Aug",leg:"bosnia",icon:"🌉",title:"Jajce → Mostar",
    bullets:["Scenic drive down through Konjic and Jablanica (try the roast lamb if stopping).","Arrive Mostar in the afternoon, explore the Old Bridge and Old Town, sunset from the bridge."],
-   lat:43.3372866,lng:17.815006,cid:"2048594925283427524",
+   lat:43.3372866,lng:17.815006,cid:"2048594925283427524",route:[JAJCE,MOSTAR],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZNd6Z1ci8ScyELokTRRtoJOtEGbP4zf_LkA-AxeKsikSD7jnJOLH-3qgiYPo3cKBSHlE0aYLPgkmmF_iI2S-UkziK7kYvnIT6lnwR2257-u1SkVyuKd3aav1abA16QnSijvLdGl9bwCjuzZFbo=w700-h500",
    caption:"Old Bridge (Stari Most), Mostar"},
   {n:5,date:"Tue 25 Aug",leg:"bosnia",icon:"💦",title:"Mostar — Waterfalls & Villages",
    bullets:["Blagaj Tekke — dervish house built into a cliff at the source of the Buna River.","Počitelj — fortified Ottoman-era hill village, short easy wander.","Kravica Waterfalls — bring swimwear, easy access, a proper toddler splash spot.","(Skakavec Waterfall skipped — the approach is a ~1hr hike each way, not ideal with a 4-year-old.)"],
-   lat:43.15602,lng:17.6081011,cid:"17779517597692586133",
+   lat:43.15602,lng:17.6081011,cid:"17779517597692586133",route:[MOSTAR,BLAGAJ,POCITELJ,KRAVICA],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZP5o-iZmCSqUpUaFC01ePJbEtsWb05J3f_otfhm0JTvNG3K8Mhuk9a6L1m3vBLZAGIkzrRZLkACsFw2bdyKpxZeGA95XOTn6EvISb6sx7gUSmerjJ-ZCFaaDIFK7Mm4zjpUWv65ZWX5-2iqtA=w700-h500",
    caption:"Kravica Waterfalls"},
   {n:6,date:"Wed 26 Aug",leg:"croatia",icon:"🏞",title:"Mostar → Plitvice Lakes (Croatia)",
    bullets:["Longer drive (~4hrs) but breaks up what would otherwise be a brutal Mostar→Ljubljana day.","Afternoon/evening at Plitvice — even a short boardwalk loop is spectacular.","Overnight near the park."],
-   lat:44.8653966,lng:15.5820119,cid:"367764615831641712",
+   lat:44.8653966,lng:15.5820119,cid:"367764615831641712",route:[KRAVICA,PLITVICE],
    photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjA7ZxWOgOaRWhEp2iLkEzII3MehN-kjF6AmBaSJhwYw4yAsWQA_yqV5u0zm3W2XDGhQeSjhVN2bxiRWYWl3k4oMBjt8HJFO6BUiQ9jvbqMKm2_zaCh3c6fqLJQuNqxUesoUtazU9_uE5bDNFAkhLjQpWA=w700-h500",
    caption:"Plitvice Lakes National Park"},
   {n:7,date:"Thu 27 Aug",leg:"slovenia",icon:"🎂",bday:true,title:"Plitvice → Ljubljana — Birthday!",
    bullets:["Morning: an easy lakeside boardwalk loop and the boat crossing — a proper birthday morning for a 4-year-old.","Drive on to Ljubljana (~2.5–3hrs), arriving early-mid afternoon.","Evening: birthday dinner in Ljubljana's Old Town, cake."],
-   lat:46.047677,lng:14.515132,cid:"5002083871361299812",
+   lat:46.047677,lng:14.515132,cid:"5002083871361299812",route:[PLITVICE,LJU],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZM_TFlGdcR8KZ2ka7mw3DFCsK4_Uq5jq-XbsZNCcn6UzK8MOkbJUcXoXgbmKZdHaSUrLEseAKPQB7DOgFHiwD7srNDZNtRfE0i0odOGXgDMruTjzCaVLMzC0kp-q-PyZzzhH62hjvzmbsRT=w700-h500",
    caption:"Ljubljana"},
   {n:8,date:"Fri 28 Aug",leg:"slovenia",icon:"🚣",title:"Lake Bled",
    bullets:["Bled Castle, the pletna boat ride out to the island, an easy stroll around the lake shore.","Rent a rowboat as an alternative to the pletna — more fun for a toddler if you don't mind the paddling.","Straža Hill toboggan run — tandem sledges let a young child ride with an adult.","Vintgar Gorge (10–15 min away) — flat boardwalk, easy with a toddler, if energy allows.","Ojstrica viewpoint — the classic postcard shot over the lake, but it's a genuinely steep, rocky ~30min scramble in places; better as a quick solo turn for one adult while the other stays lakeside than a family climb.","Sunbathe/swim at the lake shore if the weather's warm.","Dinner: Kavarna Park on the lakeshore — birthplace of the original Bled cream cake (kremšnita)."],
-   lat:46.363598,lng:14.0938053,cid:"9497391439378712492",
+   lat:46.363598,lng:14.0938053,cid:"9497391439378712492",route:FULL_ROUTE.concat([BLED]),
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZO2G0G6hVs28md-xbTc_Ep-1t5GwVkg3l0Ujib2kvoVfmAbpGayd3jMh-Ise0gVYsSeAIIXWy8toHXJzG7X3p8BClYTNDPmojlUHL5VeEjJTOlsZn49fYl4LejkCCZmLp52tkgXBpT1SYCxhuA=w700-h500",
    caption:"Lake Bled"},
   {n:9,date:"Sat 29 Aug",leg:"slovenia",icon:"⛰",title:"Lake Bohinj & the Julian Alps",
    bullets:["Boat ride across Lake Bohinj — quieter than Bled, mountains rising straight from the shoreline.","Vogel cable car up for panoramic views over the lake and valley — easy, no hiking required (around €33pp).","Mostnica Gorge — do the short first stretch to the old bridge and back (~1hr, easy); the full hike to the waterfall is a genuine 4hr round trip, worth skipping this trip.","Savica Waterfall — optional, and more demanding: a real ~20–30min climb up stone steps. Worth it if everyone's got the legs, easy to skip if not."],
-   lat:46.2840104,lng:13.8594144,cid:"4589325467126532301",
+   lat:46.2840104,lng:13.8594144,cid:"4589325467126532301",route:FULL_ROUTE.concat([BOHINJ]),
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZM-gIlJLoc_JRRnckIqRqH_liyfHSsHP_nBXCOly9wliZFD3WIP5g1S7ZurApI8N0Vn1Xcd9EL3kfGgxmwhBIcEzTlesV18joyfGMDq4vAGXN0hUe3C_kIHUhnWuCzyXofeqY5AFnRGRRJsZQ=w700-h500",
    caption:"Lake Bohinj"},
   {n:10,date:"Sun 30 Aug",leg:"slovenia",icon:"🕯",title:"Postojna Cave & Predjama Castle",
    bullets:["Postojna Cave — the underground train ride is a hit with young children, stroller-friendly for the accessible sections.","Predjama Castle — dramatic castle built into a cliff face, just outside."],
-   lat:45.7830298,lng:14.2038417,cid:"10180141766497075902",
+   lat:45.7830298,lng:14.2038417,cid:"10180141766497075902",route:FULL_ROUTE.concat([POSTOJNA]),
    photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjBZdutoR4w9juDh6vXUtRlijDx-za3rFkVNG0aM5ka3SaBYDN7TT1ab3c29TX40doJML8SEREBYd18dsqHrxJuAgtFDY73bXimY-0vwjiPtQTnsqH-4FQPnGBkGjRLb4ypCIaNlX9EbrnVAIg=w700-h500",
    caption:"Postojna Cave"},
   {n:11,date:"Mon 31 Aug",leg:"slovenia",icon:"🏔",title:"Kranjska Gora — Lake Jasna & Zelenci",
    bullets:["Drive north from Ljubljana toward Kranjska Gora (~45min–1hr).","Zelenci Nature Reserve — a short, easy ~10min return walk to a vivid turquoise spring-fed pool with mountains behind; great for a toddler.","Lake Jasna — easy walk around a striking alpine-blue lake; swimming optional (cold, ~8°C)."],
-   lat:46.4925762,lng:13.7377588,cid:"13886851757976624053",
+   lat:46.4925762,lng:13.7377588,cid:"13886851757976624053",route:FULL_ROUTE.concat([ZELENCI]),
    photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjB_OT1z50t2p2t1unNmOGyzo5p1gOZRk5vOMCBHEn5ylnYlTDWID8W76DY3SE3lyLZg0KCjFhVVGNqLnuvzxr_APjlSDC8R9v5sYvaLwG08nYN8y-mA9WPsy0XYE8JhwaE_FBr4na6lkW6t6A=w700-h500",
    caption:"Zelenci Nature Reserve"},
   {n:12,date:"Tue 1 Sep",leg:"slovenia",icon:"🏁",title:"Depart",
@@ -360,6 +376,17 @@ const LEG_LABEL = {bosnia:"Bosnia & Herzegovina", croatia:"Crossing into Croatia
 
 function mapsUrl(cid){ return "https://maps.google.com/?cid=" + cid; }
 function embedUrl(lat,lng){ return "https://www.google.com/maps?q=" + lat + "," + lng + "&z=13&output=embed"; }
+function directionsEmbedUrl(points){
+  const daddr = points.slice(1).map(p => p[0] + "," + p[1]).join("+to:");
+  return "https://www.google.com/maps?saddr=" + points[0][0] + "," + points[0][1] + "&daddr=" + daddr + "&output=embed";
+}
+
+document.getElementById("overview").innerHTML =
+  '<div class="overview">' +
+    '<h2>The full route: Sarajevo → Ljubljana</h2>' +
+    '<p class="sub">The backbone of the trip, Days 1–7 — real driving directions, with distance and time shown directly on the map.</p>' +
+    '<iframe src="'+directionsEmbedUrl(FULL_ROUTE)+'" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' +
+  '</div>';
 
 const railEl = document.getElementById("rail");
 const daysEl = document.getElementById("days");
@@ -397,7 +424,10 @@ DAYS.forEach(d=>{
     if(d.photo){
       mediaHtml += '<figure><img src="'+d.photo+'" loading="lazy" alt="'+d.caption+'"><figcaption>'+d.caption+' &middot; photo via Google Maps</figcaption></figure>';
     }
-    mediaHtml += '<figure><iframe src="'+embedUrl(d.lat,d.lng)+'" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><figcaption>Live map</figcaption></figure>';
+    const mapSrc = d.route ? directionsEmbedUrl(d.route) : embedUrl(d.lat,d.lng);
+    const fromStart = d.route && d.route[0] === SJJ && d.route.length > 3;
+    const mapCaption = fromStart ? "Full driving route from Sarajevo \u2014 distance & time on map" : (d.route ? "Today's driving leg \u2014 distance & time on map" : "Live map");
+    mediaHtml += '<figure><iframe src="'+mapSrc+'" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><figcaption>'+mapCaption+'</figcaption></figure>';
     mediaHtml += '</div>';
   }
 
