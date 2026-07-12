@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bosnia &amp; Slovenia — Family Road Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F0EFE3;
+    --paper:#FAF9F1;
+    --ink:#1E2B2A;
+    --ink-soft:#4B5957;
+    --line:#D9D4BF;
+    --teal:#1F776E;
+    --teal-dark:#123F3A;
+    --teal-tint:#E1EFEC;
+    --rust:#AD4A2E;
+    --rust-tint:#F3E2DA;
+    --gold:#C08F32;
+    --gold-tint:#F5E9D2;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",serif;margin:0;color:var(--ink);}
+  a{color:var(--teal-dark);}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px;}
+
+  header.hero{
+    padding:56px 0 28px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--rust);
+    margin:0 0 10px;
+  }
+  h1.title{font-size:clamp(32px,6vw,52px);font-weight:600;line-height:1.05;}
+  .subtitle{font-size:16px;color:var(--ink-soft);margin-top:12px;max-width:52ch;}
+  .glance{
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin-top:26px;
+  }
+  .glance span{
+    font-size:13px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:999px;
+    color:var(--ink-soft);
+  }
+  .glance b{color:var(--ink);font-weight:500;}
+
+  nav.roadbook{
+    position:sticky;top:0;z-index:20;
+    background:var(--bg);
+    border-bottom:1px solid var(--line);
+    padding:14px 0 10px;
+  }
+  .filters{
+    display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;
+  }
+  .filters button{
+    font-family:"IBM Plex Sans",sans-serif;
+    font-size:13px;font-weight:500;
+    padding:6px 14px;border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink-soft);
+    cursor:pointer;
+  }
+  .filters button.active{
+    background:var(--teal-dark);border-color:var(--teal-dark);color:#fff;
+  }
+  .rail{
+    display:flex;gap:0;overflow-x:auto;
+    padding:8px 0 4px;
+    position:relative;
+  }
+  .rail::before{
+    content:"";position:absolute;left:0;right:0;top:33px;
+    height:2px;background:repeating-linear-gradient(to right,var(--line) 0 6px, transparent 6px 11px);
+    z-index:0;
+  }
+  .chip{
+    position:relative;z-index:1;
+    flex:0 0 auto;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    padding:0 14px;cursor:pointer;
+    background:none;border:none;
+    font-family:"IBM Plex Sans",sans-serif;
+    color:var(--ink-soft);
+  }
+  .chip .dot{
+    width:26px;height:26px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--teal);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;color:var(--teal-dark);
+  }
+  .chip.bday .dot{border-color:var(--gold);color:var(--gold);background:var(--gold-tint);}
+  .chip .lbl{font-size:11px;white-space:nowrap;}
+  .chip.hidden{display:none;}
+
+  main{padding:34px 0 80px;}
+  .leg-divider{
+    display:flex;align-items:center;gap:14px;
+    margin:44px 0 20px;
+  }
+  .leg-divider:first-child{margin-top:0;}
+  .leg-divider .line{flex:1;height:1px;background:var(--line);}
+  .leg-divider span{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  .day{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .day.bday{border-color:var(--gold);}
+  .day-head{
+    display:flex;align-items:center;gap:14px;
+    padding:16px 18px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .day-num{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;color:var(--teal-dark);
+    background:var(--teal-tint);
+    border-radius:999px;
+    padding:4px 10px;
+    flex:0 0 auto;
+  }
+  .day.bday .day-num{background:var(--gold-tint);color:#7A5A1E;}
+  .day-titles{flex:1;min-width:0;}
+  .day-titles .d{font-size:12.5px;color:var(--ink-soft);font-family:"IBM Plex Mono",monospace;}
+  .day-titles h3{font-size:19px;font-weight:500;margin-top:2px;}
+  .chevron{
+    font-size:18px;color:var(--ink-soft);
+    transition:transform .2s ease;
+    flex:0 0 auto;
+  }
+  .day.open .chevron{transform:rotate(180deg);}
+  .day-body{
+    display:none;
+    padding:0 18px 20px;
+  }
+  .day.open .day-body{display:block;}
+  .day-body ul{margin:0 0 16px;padding-left:20px;}
+  .day-body li{margin-bottom:7px;}
+  .day-media{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px;
+  }
+  @media(max-width:600px){.day-media{grid-template-columns:1fr;}}
+  .day-media figure{margin:0;}
+  .day-media img{
+    width:100%;height:170px;object-fit:cover;border-radius:10px;display:block;background:var(--teal-tint);
+  }
+  .day-media iframe{
+    width:100%;height:170px;border:0;border-radius:10px;
+  }
+  figcaption{font-size:11.5px;color:var(--ink-soft);margin-top:4px;}
+  .maplink{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:12px;
+    font-size:13px;font-weight:500;
+    color:var(--teal-dark);text-decoration:none;
+    border-bottom:1px solid var(--teal);
+  }
+
+  section.info{margin-top:52px;}
+  .info h2{font-size:22px;margin-bottom:14px;}
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:600px){.card-grid{grid-template-columns:1fr;}}
+  .info-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .info-card h4{font-family:"IBM Plex Sans",sans-serif;font-size:14px;font-weight:600;margin-bottom:8px;color:var(--teal-dark);}
+  .info-card p{font-size:14px;color:var(--ink-soft);margin:0;}
+  .chosen{
+    background:var(--teal-tint);border:1px solid var(--teal);border-radius:var(--radius);
+    padding:14px 18px;margin-top:14px;font-size:14px;color:var(--teal-dark);font-weight:500;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:24px 0 60px;
+    font-size:12.5px;color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Road trip &middot; 12 days</p>
+    <h1 class="title">Bosnia &amp; Slovenia</h1>
+    <p class="subtitle">Sarajevo to Ljubljana by car, waterfalls and old towns along the way, lakes and caves at the end &mdash; with a fourth birthday somewhere in the middle.</p>
+    <div class="glance">
+      <span><b>21 Aug &ndash; 1 Sep 2026</b></span>
+      <span>2 adults + 1 toddler</span>
+      <span>One car, Sarajevo &rarr; Ljubljana</span>
+      <span>🎂 Birthday: <b>27 Aug</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="roadbook">
+  <div class="wrap">
+    <div class="filters" id="filters">
+      <button data-leg="all" class="active">All 12 days</button>
+      <button data-leg="bosnia">Bosnia</button>
+      <button data-leg="croatia">Croatia</button>
+      <button data-leg="slovenia">Slovenia</button>
+    </div>
+    <div class="rail" id="rail"></div>
+  </div>
+</nav>
+
+<main class="wrap" id="main">
+  <div id="days"></div>
+
+  <section class="info">
+    <h2>Getting the car right</h2>
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>One car, dropped off in Ljubljana</h4>
+        <p>Full control of timing, and the drive itself &mdash; river valleys, karst, forested hills &mdash; is worth doing rather than skipping. Costs more in one-way drop fees, but no backtracking and no extra airport day with a toddler.</p>
+      </div>
+      <div class="info-card">
+        <h4>Return in Sarajevo, fly, hire again</h4>
+        <p>Cheaper car rental, but adds a flight leg (likely with a connection), a second rental, and a ~2.5hr backtrack to Sarajevo. Misses the Bosnia&rarr;Croatia scenery entirely.</p>
+      </div>
+    </div>
+    <p class="chosen">Chosen approach: one car all the way, with the long Mostar&rarr;Ljubljana drive broken overnight at Plitvice Lakes.</p>
+  </section>
+
+  <section class="info">
+    <h2>Where to stay</h2>
+    <div class="card-grid">
+      <div class="info-card"><h4>Sarajevo &middot; 2 nights</h4><p>A few minutes' walk from the Latin Bridge, close to the Old Town, the cable car, and the carpet shop.</p></div>
+      <div class="info-card"><h4>Jajce &middot; 1 night</h4><p>Small and walkable &mdash; any central guesthouse near the waterfall works.</p></div>
+      <div class="info-card"><h4>Mostar &middot; 1 night</h4><p>Walking distance to the Old Bridge for the evening atmosphere.</p></div>
+      <div class="info-card"><h4>Plitvice &middot; 1 night</h4><p>Near Entrance 1 or 2, to minimise the morning walk to the boardwalks.</p></div>
+      <div class="info-card"><h4>Ljubljana &middot; 5 nights</h4><p>Central and walkable to the Triple Bridge and Old Town &mdash; makes for an easy birthday evening.</p></div>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>Before you go</h2>
+    <div class="card-grid">
+      <div class="info-card"><h4>Book the car early</h4><p>International one-way availability and fees vary a lot between agencies &mdash; the sooner the better.</p></div>
+      <div class="info-card"><h4>Reserve Jajce &amp; Plitvice stays</h4><p>Small towns, limited stock in August.</p></div>
+      <div class="info-card"><h4>Pre-book timed entries</h4><p>Postojna Cave and Vintgar Gorge both need timed tickets online in peak season.</p></div>
+      <div class="info-card"><h4>Straža toboggan, tandem age</h4><p>Worth confirming the tandem-sledge minimum age on the day &mdash; generally fine for a 4-year-old riding with an adult.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Maps and photos are pulled live from Google Maps &mdash; open any "Google Maps" link to see current photos, reviews and directions.
+  </div>
+</footer>
+
+<script>
+const DAYS = [
+  {n:1,date:"Fri 21 Aug",leg:"bosnia",icon:"✈",title:"Arrive Sarajevo",
+   bullets:["Land at Sarajevo International, pick up the rental car.","Check in, settle the little one, evening stroll through Baščaršija (Old Bazaar).","Dinner: ćevapi at a Baščaršija grill house."],
+   lat:43.8598071,lng:18.4312914,cid:"16792411884729425931",
+   photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjCaseePsYnQ2nxHcWKVc8bVqEFvmO9NVjY5W-jd7xzZ5JWrOMslfmq69ChLZM8JYGQJeZDcRcNAM4vyHy_H5AYsUWtO6Zjq2rf_jxBaeiXE2brLEE0A2tpfTNFQKphF2l9kh0pAZA9ePCc_hg=w700-h500",
+   caption:"Baščaršija, Sarajevo Old Town"},
+  {n:2,date:"Sat 22 Aug",leg:"bosnia",icon:"🏛",title:"Sarajevo — Old Town & History",
+   bullets:["Morning: Latin Bridge, Gazi Husrev-beg Mosque, walk the Old Town.","Tunnel of Hope (Sarajevo War Tunnel) — a quick visit works fine with a toddler in a carrier.","War Childhood Museum, if time allows.","Late afternoon: Trebević cable car up for the view over the city.","Coffee tip: the coffee counter near the old town mixes and grinds a custom blend on request.","Carpets: the Iranian-run carpet shop near the hotel is worth a browse."],
+   lat:43.8598071,lng:18.4312914,cid:"16792411884729425931",
+   photo:null},
+  {n:3,date:"Sun 23 Aug",leg:"bosnia",icon:"💧",title:"Sarajevo → Travnik → Jajce",
+   bullets:["Drive north-west via Travnik (fortress town) to Jajce.","Jajce Waterfall — right in the town centre, no hike required.","Pliva Lakes watermills — short easy walk, very toddler-friendly.","Overnight in Jajce."],
+   lat:44.3378555,lng:17.2703009,cid:"14703862190480480944",
+   photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZOXl2ksCeyZmKYQUftE9tUx5MiQRnODFhp-TJVtLclCq9nInaCDdqL3H13IYx5djyUKlPpqoiOAB6dX9ePSaHhe8nnMQ376e4fymiLZWzXCuy_q3VWa4umsq8xuxIhdChAKr23kL-wXPDQmqnw=w700-h500",
+   caption:"Pliva Waterfall, Jajce"},
+  {n:4,date:"Mon 24 Aug",leg:"bosnia",icon:"🌉",title:"Jajce → Mostar",
+   bullets:["Scenic drive down through Konjic and Jablanica (try the roast lamb if stopping).","Arrive Mostar in the afternoon, explore the Old Bridge and Old Town, sunset from the bridge."],
+   lat:43.3372866,lng:17.815006,cid:"2048594925283427524",
+   photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZNd6Z1ci8ScyELokTRRtoJOtEGbP4zf_LkA-AxeKsikSD7jnJOLH-3qgiYPo3cKBSHlE0aYLPgkmmF_iI2S-UkziK7kYvnIT6lnwR2257-u1SkVyuKd3aav1abA16QnSijvLdGl9bwCjuzZFbo=w700-h500",
+   caption:"Old Bridge (Stari Most), Mostar"},
+  {n:5,date:"Tue 25 Aug",leg:"bosnia",icon:"💦",title:"Mostar — Waterfalls & Villages",
+   bullets:["Blagaj Tekke — dervish house built into a cliff at the source of the Buna River.","Počitelj — fortified Ottoman-era hill village, short easy wander.","Kravica Waterfalls — bring swimwear, easy access, a proper toddler splash spot.","(Skakavec Waterfall skipped — the approach is a ~1hr hike each way, not ideal with a 4-year-old.)"],
+   lat:43.15602,lng:17.6081011,cid:"17779517597692586133",
+   photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZP5o-iZmCSqUpUaFC01ePJbEtsWb05J3f_otfhm0JTvNG3K8Mhuk9a6L1m3vBLZAGIkzrRZLkACsFw2bdyKpxZeGA95XOTn6EvISb6sx7gUSmerjJ-ZCFaaDIFK7Mm4zjpUWv65ZWX5-2iqtA=w700-h500",
+   caption:"Kravica Waterfalls"},
+  {n:6,date:"Wed 26 Aug",leg:"croatia",icon:"🏞",title:"Mostar → Plitvice Lakes (Croatia)",
+   bullets:["Longer drive (~4hrs) but breaks up what would otherwise be a brutal Mostar→Ljubljana day.","Afternoon/evening at Plitvice — even a short boardwalk loop is spectacular.","Overnight near the park."],
+   lat:44.8653966,lng:15.5820119,cid:"367764615831641712",
+   photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjA7ZxWOgOaRWhEp2iLkEzII3MehN-kjF6AmBaSJhwYw4yAsWQA_yqV5u0zm3W2XDGhQeSjhVN2bxiRWYWl3k4oMBjt8HJFO6BUiQ9jvbqMKm2_zaCh3c6fqLJQuNqxUesoUtazU9_uE5bDNFAkhLjQpWA=w700-h500",
+   caption:"Plitvice Lakes National Park"},
+  {n:7,date:"Thu 27 Aug",leg:"slovenia",icon:"🎂",bday:true,title:"Plitvice → Ljubljana — Birthday!",
+   bullets:["Morning: an easy lakeside boardwalk loop and the boat crossing — a proper birthday morning for a 4-year-old.","Drive on to Ljubljana (~2.5–3hrs), arriving early-mid afternoon.","Evening: birthday dinner in Ljubljana's Old Town, cake."],
+   lat:46.047677,lng:14.515132,cid:"5002083871361299812",
+   photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZM_TFlGdcR8KZ2ka7mw3DFCsK4_Uq5jq-XbsZNCcn6UzK8MOkbJUcXoXgbmKZdHaSUrLEseAKPQB7DOgFHiwD7srNDZNtRfE0i0odOGXgDMruTjzCaVLMzC0kp-q-PyZzzhH62hjvzmbsRT=w700-h500",
+   caption:"Ljubljana"},
+  {n:8,date:"Fri 28 Aug",leg:"slovenia",icon:"🚣",title:"Lake Bled",
+   bullets:["Bled Castle, the pletna boat ride out to the island, an easy stroll around the lake shore.","Rent a rowboat as an alternative to the pletna — more fun for a toddler if you don't mind the paddling.","Straža Hill toboggan run — tandem sledges let a young child ride with an adult.","Sunbathe/swim at the lake shore if the weather's warm.","Dinner: Kavarna Park on the lakeshore — birthplace of the original Bled cream cake (kremšnita)."],
+   lat:46.363598,lng:14.0938053,cid:"9497391439378712492",
+   photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZO2G0G6hVs28md-xbTc_Ep-1t5GwVkg3l0Ujib2kvoVfmAbpGayd3jMh-Ise0gVYsSeAIIXWy8toHXJzG7X3p8BClYTNDPmojlUHL5VeEjJTOlsZn49fYl4LejkCCZmLp52tkgXBpT1SYCxhuA=w700-h500",
+   caption:"Lake Bled"},
+  {n:9,date:"Sat 29 Aug",leg:"slovenia",icon:"⛰",title:"Lake Bohinj & the Julian Alps",
+   bullets:["Bohinj sits inside Triglav National Park and is quieter than Bled — lakeside walk, maybe a swim.","Vintgar Gorge boardwalk is flat and manageable in short stretches if you want to fit it in."],
+   lat:46.2840104,lng:13.8594144,cid:"4589325467126532301",
+   photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZM-gIlJLoc_JRRnckIqRqH_liyfHSsHP_nBXCOly9wliZFD3WIP5g1S7ZurApI8N0Vn1Xcd9EL3kfGgxmwhBIcEzTlesV18joyfGMDq4vAGXN0hUe3C_kIHUhnWuCzyXofeqY5AFnRGRRJsZQ=w700-h500",
+   caption:"Lake Bohinj"},
+  {n:10,date:"Sun 30 Aug",leg:"slovenia",icon:"🕯",title:"Postojna Cave & Predjama Castle",
+   bullets:["Postojna Cave — the underground train ride is a hit with young children, stroller-friendly for the accessible sections.","Predjama Castle — dramatic castle built into a cliff face, just outside."],
+   lat:45.7830298,lng:14.2038417,cid:"10180141766497075902",
+   photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjBZdutoR4w9juDh6vXUtRlijDx-za3rFkVNG0aM5ka3SaBYDN7TT1ab3c29TX40doJML8SEREBYd18dsqHrxJuAgtFDY73bXimY-0vwjiPtQTnsqH-4FQPnGBkGjRLb4ypCIaNlX9EbrnVAIg=w700-h500",
+   caption:"Postojna Cave"},
+  {n:11,date:"Mon 31 Aug",leg:"slovenia",icon:"🌳",title:"Buffer Day in Ljubljana",
+   bullets:["Kept free deliberately — re-do a favourite spot, rest, or absorb any delays from earlier in the trip.","If all on schedule: Ljubljana Castle funicular, Triple Bridge, Dragon Bridge, riverside cafés, the central market.","Tivoli Park — big green park, easy paths and open space for a toddler to run around.","Nebotičnik rooftop terrace — quick lift up for a view over the city, no hike required."],
+   lat:46.0537537,lng:14.494917,cid:"1081136715368919408",
+   photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZPszaUpVC1_EX9--a2ipW64GHZ-xz_iAAkBd_iRho2Mhmznk-s1Yb9gEuRqArlhBSMdShy6JcPGOacBrCLuQfEYTTa3z8iFBWIoopRunUEK1cI8My6wJoUILte0LPw8cG-j8dKLNPwqj-OLFQ=w700-h500",
+   caption:"Tivoli Park, Ljubljana"},
+  {n:12,date:"Tue 1 Sep",leg:"slovenia",icon:"🏁",title:"Depart",
+   bullets:["Drop off the car in Ljubljana, fly home."],
+   lat:46.047677,lng:14.515132,cid:"5002083871361299812",
+   photo:null}
+];
+
+const LEG_LABEL = {bosnia:"Bosnia & Herzegovina", croatia:"Crossing into Croatia", slovenia:"Slovenia"};
+
+function mapsUrl(cid){ return "https://maps.google.com/?cid=" + cid; }
+function embedUrl(lat,lng){ return "https://www.google.com/maps?q=" + lat + "," + lng + "&z=13&output=embed"; }
+
+const railEl = document.getElementById("rail");
+const daysEl = document.getElementById("days");
+let lastLeg = null;
+
+DAYS.forEach(d=>{
+  const chip = document.createElement("button");
+  chip.className = "chip" + (d.bday ? " bday" : "");
+  chip.dataset.leg = d.leg;
+  chip.innerHTML = '<span class="dot">'+d.n+'</span><span class="lbl">'+d.date.split(" ")[0]+' '+d.date.split(" ")[1]+'</span>';
+  chip.addEventListener("click", ()=>{
+    const el = document.getElementById("day-"+d.n);
+    el.classList.add("open");
+    el.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+  railEl.appendChild(chip);
+
+  if(d.leg !== lastLeg){
+    const div = document.createElement("div");
+    div.className = "leg-divider";
+    div.dataset.leg = d.leg;
+    div.innerHTML = '<span>'+LEG_LABEL[d.leg]+'</span><div class="line"></div>';
+    daysEl.appendChild(div);
+    lastLeg = d.leg;
+  }
+
+  const card = document.createElement("div");
+  card.className = "day" + (d.bday ? " bday" : "") + ((d.n===1||d.bday) ? " open" : "");
+  card.id = "day-"+d.n;
+  card.dataset.leg = d.leg;
+
+  let mediaHtml = "";
+  if(d.photo || d.lat){
+    mediaHtml = '<div class="day-media">';
+    if(d.photo){
+      mediaHtml += '<figure><img src="'+d.photo+'" loading="lazy" alt="'+d.caption+'"><figcaption>'+d.caption+' &middot; photo via Google Maps</figcaption></figure>';
+    }
+    mediaHtml += '<figure><iframe src="'+embedUrl(d.lat,d.lng)+'" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><figcaption>Live map</figcaption></figure>';
+    mediaHtml += '</div>';
+  }
+
+  card.innerHTML =
+    '<div class="day-head">' +
+      '<span class="day-num">'+String(d.n).padStart(2,"0")+'</span>' +
+      '<div class="day-titles"><div class="d">'+d.date+'</div><h3>'+d.icon+' '+d.title+'</h3></div>' +
+      '<span class="chevron">⌄</span>' +
+    '</div>' +
+    '<div class="day-body">' +
+      '<ul>'+d.bullets.map(b=>'<li>'+b+'</li>').join('')+'</ul>' +
+      mediaHtml +
+      '<a class="maplink" href="'+mapsUrl(d.cid)+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>' +
+    '</div>';
+
+  card.querySelector(".day-head").addEventListener("click", ()=>{
+    card.classList.toggle("open");
+  });
+
+  daysEl.appendChild(card);
+});
+
+document.getElementById("filters").addEventListener("click", e=>{
+  if(e.target.tagName !== "BUTTON") return;
+  const leg = e.target.dataset.leg;
+  document.querySelectorAll("#filters button").forEach(b=>b.classList.remove("active"));
+  e.target.classList.add("active");
+
+  document.querySelectorAll(".day").forEach(el=>{
+    el.style.display = (leg==="all" || el.dataset.leg===leg) ? "" : "none";
+  });
+  document.querySelectorAll(".leg-divider").forEach(el=>{
+    el.style.display = (leg==="all" || el.dataset.leg===leg) ? "" : "none";
+  });
+  document.querySelectorAll(".chip").forEach(el=>{
+    el.classList.toggle("hidden", !(leg==="all" || el.dataset.leg===leg));
+  });
+});
+</script>
+
+</body>
+</html>
