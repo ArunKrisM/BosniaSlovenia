@@ -197,6 +197,17 @@
     color:var(--teal-dark);text-decoration:none;
     border-bottom:1px solid var(--teal);
   }
+  .chips-row{
+    display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;
+  }
+  .chips-row a{
+    font-size:12.5px;font-weight:500;text-decoration:none;
+    padding:5px 11px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:5px;
+    border:1px solid var(--line);
+  }
+  .chips-row a.parking{color:var(--teal-dark);background:var(--teal-tint);border-color:transparent;}
+  .chips-row a.eat{color:#7A5A1E;background:var(--gold-tint);border-color:transparent;}
 
   section.info{margin-top:52px;}
   .overview{
@@ -316,13 +327,15 @@ const DAYS = [
    bullets:["Land at Sarajevo International, pick up the rental car.","Check in, settle the little one, evening stroll through Baščaršija (Old Bazaar).","Dinner: ćevapi at a Baščaršija grill house."],
    lat:43.8598071,lng:18.4312914,cid:"16792411884729425931",
    photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjCaseePsYnQ2nxHcWKVc8bVqEFvmO9NVjY5W-jd7xzZ5JWrOMslfmq69ChLZM8JYGQJeZDcRcNAM4vyHy_H5AYsUWtO6Zjq2rf_jxBaeiXE2brLEE0A2tpfTNFQKphF2l9kh0pAZA9ePCc_hg=w700-h500",
-   caption:"Baščaršija, Sarajevo Old Town"},
+   caption:"Baščaršija, Sarajevo Old Town",
+   parking:[{label:"Underground Garage, city centre",placeId:"ChIJt9_oUgDJWEcRQaTCGc6gc-M"}]},
   {n:2,date:"Sat 22 Aug",leg:"bosnia",icon:"🏛",title:"Sarajevo — Old Town & History",
    bullets:["Morning: Latin Bridge, Gazi Husrev-beg Mosque, walk the Old Town.","Tunnel of Hope (Sarajevo War Tunnel) — a quick visit works fine with a toddler in a carrier.","War Childhood Museum, if time allows.","Late afternoon: Trebević cable car up for the view over the city.","Coffee tip: the coffee counter near the old town mixes and grinds a custom blend on request.","Carpets: the Iranian-run carpet shop near the hotel is worth a browse."],
    lat:43.8598071,lng:18.4312914,cid:"16792411884729425931",
-   photo:null},
+   photo:null,
+   parking:[{label:"Underground Garage, city centre",placeId:"ChIJt9_oUgDJWEcRQaTCGc6gc-M"}]},
   {n:3,date:"Sun 23 Aug",leg:"bosnia",icon:"💧",title:"Sarajevo → Travnik → Jajce",
-   bullets:["Drive north-west via Travnik (fortress town) to Jajce.","Jajce Waterfall — right in the town centre, no hike required.","Pliva Lakes watermills — short easy walk, very toddler-friendly.","Overnight in Jajce."],
+   bullets:["Drive north-west via Travnik (fortress town) to Jajce.","Jajce Waterfall — right in the town centre, no hike required.","Pliva Lakes watermills — short easy walk, very toddler-friendly.","Parking: there's informal roadside parking right by the waterfall viewpoint, near the cafés and a petrol station — no need to pre-plan a specific spot.","Overnight in Jajce."],
    lat:44.3378555,lng:17.2703009,cid:"14703862190480480944",route:[SJJ,TRAVNIK,JAJCE],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZOXl2ksCeyZmKYQUftE9tUx5MiQRnODFhp-TJVtLclCq9nInaCDdqL3H13IYx5djyUKlPpqoiOAB6dX9ePSaHhe8nnMQ376e4fymiLZWzXCuy_q3VWa4umsq8xuxIhdChAKr23kL-wXPDQmqnw=w700-h500",
    caption:"Pliva Waterfall, Jajce"},
@@ -330,51 +343,64 @@ const DAYS = [
    bullets:["Scenic drive down through Konjic and Jablanica (try the roast lamb if stopping).","Arrive Mostar in the afternoon, explore the Old Bridge and Old Town, sunset from the bridge."],
    lat:43.3372866,lng:17.815006,cid:"2048594925283427524",route:[JAJCE,MOSTAR],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZNd6Z1ci8ScyELokTRRtoJOtEGbP4zf_LkA-AxeKsikSD7jnJOLH-3qgiYPo3cKBSHlE0aYLPgkmmF_iI2S-UkziK7kYvnIT6lnwR2257-u1SkVyuKd3aav1abA16QnSijvLdGl9bwCjuzZFbo=w700-h500",
-   caption:"Old Bridge (Stari Most), Mostar"},
+   caption:"Old Bridge (Stari Most), Mostar",
+   parking:[{label:"Old Bridge Parking",placeId:"ChIJB20zxMNDSxMR_wdVGLaO3Ck"}],
+   eat:[{label:"Tima-Irma (ćevapi, steps from the bridge)",placeId:"ChIJc3Ck3wZDSxMRfqLNjtnnk90"}]},
   {n:5,date:"Tue 25 Aug",leg:"bosnia",icon:"💦",title:"Mostar — Waterfalls & Villages",
-   bullets:["Blagaj Tekke — dervish house built into a cliff at the source of the Buna River.","Počitelj — fortified Ottoman-era hill village, short easy wander.","Kravica Waterfalls — bring swimwear, easy access, a proper toddler splash spot.","(Skakavec Waterfall skipped — the approach is a ~1hr hike each way, not ideal with a 4-year-old.)"],
+   bullets:["Blagaj Tekke — dervish house built into a cliff at the source of the Buna River.","Parking at Blagaj: use the official lot right by the Tekke (~2–4KM/day, cash only). There have been reports of an informal attendant demanding 10–20KM — the correct price is 2–4KM, worth knowing before you pay.","Počitelj — fortified Ottoman-era hill village, short easy wander. Free parking right by the entrance.","Kravica Waterfalls — bring swimwear, easy access, a proper toddler splash spot. Large official car park, cost is included in the park ticket.","(Skakavec Waterfall skipped — the approach is a ~1hr hike each way, not ideal with a 4-year-old.)"],
    lat:43.15602,lng:17.6081011,cid:"17779517597692586133",route:[MOSTAR,BLAGAJ,POCITELJ,KRAVICA],
+   parking:[{label:"Blagaj Tekija Parking",placeId:"ChIJqW_qKABnSxMRjb756vXpDSI"},{label:"Počitelj Main Parking (free)",placeId:"ChIJOTEaAPxzSxMRoVbHIeXgALM"},{label:"Kravica Parking",placeId:"ChIJb3yY5pcNSxMRbmstHEoSckw"}],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZP5o-iZmCSqUpUaFC01ePJbEtsWb05J3f_otfhm0JTvNG3K8Mhuk9a6L1m3vBLZAGIkzrRZLkACsFw2bdyKpxZeGA95XOTn6EvISb6sx7gUSmerjJ-ZCFaaDIFK7Mm4zjpUWv65ZWX5-2iqtA=w700-h500",
    caption:"Kravica Waterfalls"},
   {n:6,date:"Wed 26 Aug",leg:"croatia",icon:"🏞",title:"Mostar → Plitvice Lakes (Croatia)",
    bullets:["Longer drive (~4hrs) but breaks up what would otherwise be a brutal Mostar→Ljubljana day.","Afternoon/evening at Plitvice — even a short boardwalk loop is spectacular.","Overnight near the park."],
    lat:44.8653966,lng:15.5820119,cid:"367764615831641712",route:[KRAVICA,PLITVICE],
    photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjA7ZxWOgOaRWhEp2iLkEzII3MehN-kjF6AmBaSJhwYw4yAsWQA_yqV5u0zm3W2XDGhQeSjhVN2bxiRWYWl3k4oMBjt8HJFO6BUiQ9jvbqMKm2_zaCh3c6fqLJQuNqxUesoUtazU9_uE5bDNFAkhLjQpWA=w700-h500",
-   caption:"Plitvice Lakes National Park"},
+   caption:"Plitvice Lakes National Park",
+   parking:[{label:"Entrance 1 (ticket office)",placeId:"ChIJi8ts-7xZYUcReJ3vjoK0YXU"}]},
   {n:7,date:"Thu 27 Aug",leg:"slovenia",icon:"🎂",bday:true,title:"Plitvice → Ljubljana — Birthday!",
    bullets:["Morning: an easy lakeside boardwalk loop and the boat crossing — a proper birthday morning for a 4-year-old.","Drive on to Ljubljana (~2.5–3hrs), arriving early-mid afternoon.","Evening: birthday dinner in Ljubljana's Old Town, cake."],
    lat:46.047677,lng:14.515132,cid:"5002083871361299812",route:[PLITVICE,LJU],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZM_TFlGdcR8KZ2ka7mw3DFCsK4_Uq5jq-XbsZNCcn6UzK8MOkbJUcXoXgbmKZdHaSUrLEseAKPQB7DOgFHiwD7srNDZNtRfE0i0odOGXgDMruTjzCaVLMzC0kp-q-PyZzzhH62hjvzmbsRT=w700-h500",
-   caption:"Ljubljana"},
+   caption:"Ljubljana",
+   parking:[{label:"Kongresni trg Garage (centre)",placeId:"ChIJj_SSYWEtZUcR3RvMnMR_TWI"}],
+   eat:[{label:"Lolita (riverside café, kremna rezina)",placeId:"ChIJBd5ApWMtZUcRl3Af0EF8ZHs"}]},
   {n:8,date:"Fri 28 Aug",leg:"slovenia",icon:"🚣",title:"Lake Bled",
-   bullets:["Bled Castle, the pletna boat ride out to the island, an easy stroll around the lake shore.","Rent a rowboat as an alternative to the pletna — more fun for a toddler if you don't mind the paddling.","Straža Hill toboggan run — tandem sledges let a young child ride with an adult.","Vintgar Gorge (10–15 min away) — flat boardwalk, easy with a toddler, if energy allows.","Ojstrica viewpoint — the classic postcard shot over the lake, but it's a genuinely steep, rocky ~30min scramble in places; better as a quick solo turn for one adult while the other stays lakeside than a family climb.","Sunbathe/swim at the lake shore if the weather's warm.","Dinner: Kavarna Park on the lakeshore — birthplace of the original Bled cream cake (kremšnita)."],
+   bullets:["Bled Castle, the pletna boat ride out to the island, an easy stroll around the lake shore.","Rent a rowboat as an alternative to the pletna — more fun for a toddler if you don't mind the paddling.","Straža Hill toboggan run — tandem sledges let a young child ride with an adult.","Vintgar Gorge (10–15 min away) — flat boardwalk, easy with a toddler, if energy allows. Free parking at the Vintgar Lip car park, with a shuttle bus to the entrance included in the ticket.","Ojstrica viewpoint — the classic postcard shot over the lake, but it's a genuinely steep, rocky ~30min scramble in places; better as a quick solo turn for one adult while the other stays lakeside than a family climb.","Sunbathe/swim at the lake shore if the weather's warm.","Dinner: Kavarna Park on the lakeshore — birthplace of the original Bled cream cake (kremšnita)."],
    lat:46.363598,lng:14.0938053,cid:"9497391439378712492",route:FULL_ROUTE.concat([BLED]),
+   parking:[{label:"Free parking, Grajska cesta (15min walk to lake)",placeId:"ChIJ5Sd_WACRekcRCv7hX-dNdH8"}],
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZO2G0G6hVs28md-xbTc_Ep-1t5GwVkg3l0Ujib2kvoVfmAbpGayd3jMh-Ise0gVYsSeAIIXWy8toHXJzG7X3p8BClYTNDPmojlUHL5VeEjJTOlsZn49fYl4LejkCCZmLp52tkgXBpT1SYCxhuA=w700-h500",
    caption:"Lake Bled"},
   {n:9,date:"Sat 29 Aug",leg:"slovenia",icon:"⛰",title:"Lake Bohinj & the Julian Alps",
    bullets:["Boat ride across Lake Bohinj — quieter than Bled, mountains rising straight from the shoreline.","Vogel cable car up for panoramic views over the lake and valley — easy, no hiking required (around €33pp).","Mostnica Gorge — do the short first stretch to the old bridge and back (~1hr, easy); the full hike to the waterfall is a genuine 4hr round trip, worth skipping this trip.","Savica Waterfall — optional, and more demanding: a real ~20–30min climb up stone steps. Worth it if everyone's got the legs, easy to skip if not.","Novel option: drive your car onto the motorail (Avtovlak) at Bohinjska Bistrica station for a ~35min ride through the 6km Bohinj Tunnel to Most na Soči — a genuine highlight for a 4-year-old, and it replaces what would otherwise be a ~1.5–2hr mountain drive. Tickets are cash-only, sold on board, and spaces are limited, so turn up a bit early. Worth doing instead of Savica/Vogel rather than on top of them — it's most of a morning or afternoon by the time you go, look around Most na Soči, and come back."],
    lat:46.2840104,lng:13.8594144,cid:"4589325467126532301",route:FULL_ROUTE.concat([BOHINJ]),
    photo:"https://lh3.googleusercontent.com/place-photos/AJRVUZM-gIlJLoc_JRRnckIqRqH_liyfHSsHP_nBXCOly9wliZFD3WIP5g1S7ZurApI8N0Vn1Xcd9EL3kfGgxmwhBIcEzTlesV18joyfGMDq4vAGXN0hUe3C_kIHUhnWuCzyXofeqY5AFnRGRRJsZQ=w700-h500",
-   caption:"Lake Bohinj"},
+   caption:"Lake Bohinj",
+   parking:[{label:"Vogel Cable Car (free)",placeId:"ChIJ2-XOolbzekcRR7HGlo1_FtQ"},{label:"Savica trailhead (paid, ~€5/3hr)",placeId:"ChIJF5BDkyj1ekcRJzcbftLAVho"}],
+   eat:[{label:"Camp Bohinj (casual, family pizza)",placeId:"ChIJhdJjBjH1ekcR0NIbZvMpRUw"}]},
   {n:10,date:"Sun 30 Aug",leg:"slovenia",icon:"🕯",title:"Postojna Cave & Predjama Castle",
-   bullets:["Postojna Cave — the underground train ride is a hit with young children, stroller-friendly for the accessible sections.","Predjama Castle — dramatic castle built into a cliff face, just outside."],
+   bullets:["Postojna Cave — the underground train ride is a hit with young children, stroller-friendly for the accessible sections.","Predjama Castle — dramatic castle built into a cliff face, just outside. There are two car parks; the closer one (to your right on arrival) is more convenient — an attendant collects a flat cash fee (a few euros) regardless of which one you use."],
    lat:45.7830298,lng:14.2038417,cid:"10180141766497075902",route:FULL_ROUTE.concat([POSTOJNA]),
+   parking:[{label:"Postojna Cave Parking",placeId:"ChIJ8-I9DuAxe0cR1lke8tfDz2w"},{label:"Predjama Parking",placeId:"ChIJd-LSLH4le0cRJEtx73Nq7E4"}],
    photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjBZdutoR4w9juDh6vXUtRlijDx-za3rFkVNG0aM5ka3SaBYDN7TT1ab3c29TX40doJML8SEREBYd18dsqHrxJuAgtFDY73bXimY-0vwjiPtQTnsqH-4FQPnGBkGjRLb4ypCIaNlX9EbrnVAIg=w700-h500",
    caption:"Postojna Cave"},
   {n:11,date:"Mon 31 Aug",leg:"slovenia",icon:"🏔",title:"Kranjska Gora — Lake Jasna & Zelenci",
    bullets:["Drive north from Ljubljana toward Kranjska Gora (~45min–1hr).","Zelenci Nature Reserve — a short, easy ~10min return walk to a vivid turquoise spring-fed pool with mountains behind; great for a toddler.","Lake Jasna — easy walk around a striking alpine-blue lake; swimming optional (cold, ~8°C)."],
    lat:46.4925762,lng:13.7377588,cid:"13886851757976624053",route:FULL_ROUTE.concat([ZELENCI]),
    photo:"https://lh3.googleusercontent.com/place-photos/AG9NLjB_OT1z50t2p2t1unNmOGyzo5p1gOZRk5vOMCBHEn5ylnYlTDWID8W76DY3SE3lyLZg0KCjFhVVGNqLnuvzxr_APjlSDC8R9v5sYvaLwG08nYN8y-mA9WPsy0XYE8JhwaE_FBr4na6lkW6t6A=w700-h500",
-   caption:"Zelenci Nature Reserve"},
+   caption:"Zelenci Nature Reserve",
+   parking:[{label:"Zelenci Parking (free)",placeId:"ChIJZ6DzDwB7ekcR45WQZ2ap9hc"},{label:"Jasna Parking (paid, ~€3/hr)",placeId:"ChIJ1bAY1Mh9ekcR9MMnxJFcSrM"}]},
   {n:12,date:"Tue 1 Sep",leg:"slovenia",icon:"🏁",title:"Ljubljana Morning & Depart",
    bullets:["Relaxed morning in Ljubljana before the flight — Triple Bridge, Dragon Bridge, a wander through the central market, riverside café.","Tivoli Park or the Nebotičnik rooftop terrace if there's time to spare.","Drop off the car, fly home."],
    lat:46.047677,lng:14.515132,cid:"5002083871361299812",
+   parking:[{label:"Kongresni trg Garage (centre)",placeId:"ChIJj_SSYWEtZUcR3RvMnMR_TWI"}],
    photo:null}
 ];
 
 const LEG_LABEL = {bosnia:"Bosnia & Herzegovina", croatia:"Crossing into Croatia", slovenia:"Slovenia"};
 
 function mapsUrl(cid){ return "https://maps.google.com/?cid=" + cid; }
+function placeUrl(placeId){ return "https://www.google.com/maps/place/?q=place_id:" + placeId; }
 function embedUrl(lat,lng){ return "https://www.google.com/maps?q=" + lat + "," + lng + "&z=13&output=embed"; }
 function directionsEmbedUrl(points){
   const daddr = points.slice(1).map(p => p[0] + "," + p[1]).join("+to:");
@@ -431,6 +457,18 @@ DAYS.forEach(d=>{
     mediaHtml += '</div>';
   }
 
+  let chipsHtml = "";
+  if(d.parking || d.eat){
+    chipsHtml = '<div class="chips-row">';
+    (d.parking||[]).forEach(p=>{
+      chipsHtml += '<a class="parking" href="'+placeUrl(p.placeId)+'" target="_blank" rel="noopener">\uD83C\uDD7F\uFE0F '+p.label+'</a>';
+    });
+    (d.eat||[]).forEach(f=>{
+      chipsHtml += '<a class="eat" href="'+placeUrl(f.placeId)+'" target="_blank" rel="noopener">\uD83C\uDF7D\uFE0F '+f.label+'</a>';
+    });
+    chipsHtml += '</div>';
+  }
+
   card.innerHTML =
     '<div class="day-head">' +
       '<span class="day-num">'+String(d.n).padStart(2,"0")+'</span>' +
@@ -439,6 +477,7 @@ DAYS.forEach(d=>{
     '</div>' +
     '<div class="day-body">' +
       '<ul>'+d.bullets.map(b=>'<li>'+b+'</li>').join('')+'</ul>' +
+      chipsHtml +
       mediaHtml +
       '<a class="maplink" href="'+mapsUrl(d.cid)+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>' +
     '</div>';
