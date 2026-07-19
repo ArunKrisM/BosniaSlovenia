@@ -264,6 +264,22 @@
 
 <main class="wrap" id="main">
   <div id="overview"></div>
+
+  <section class="info" style="margin-top:0;">
+    <h2>Flights</h2>
+    <div class="card-grid">
+      <div class="info-card">
+        <h4>Outbound &middot; Fri 21 Aug 2026</h4>
+        <p>London Heathrow (LHR) 06:30 &rarr; Frankfurt (1h05m connection) &rarr; Sarajevo (SJJ), landing 11:55. Duration 4h25m, Lufthansa/Lufthansa City Airlines. Ref: 7UD6GZ.</p>
+      </div>
+      <div class="info-card">
+        <h4>Return &middot; Tue 1 Sep 2026</h4>
+        <p>Ljubljana (LJU) 18:30 &rarr; Brussels (1h05m connection) &rarr; London Heathrow, landing 21:35. Duration 4h05m, Air Baltic/Brussels Airlines. Ref: 7UD6GZ.</p>
+      </div>
+    </div>
+    <p class="chosen">Landing at 11:55 on Day 1 means a real afternoon in Sarajevo, not just an evening. Departing at 18:30 on the last day means a full day in Ljubljana, not just a morning &mdash; both reflected below.</p>
+  </section>
+
   <div id="days"></div>
 
   <section class="info">
@@ -319,7 +335,7 @@ const FULL_ROUTE = [SJJ,TRAVNIK,JAJCE,MOSTAR,BLAGAJ,POCITELJ,KRAVICA,PLITVICE,LJ
 
 const DAYS = [
   {n:1,date:"Fri 21 Aug",leg:"bosnia",icon:"✈",title:"Arrive Sarajevo",
-   bullets:["Land at Sarajevo International, pick up the rental car.","Check in, settle the little one, evening stroll through Baščaršija (Old Bazaar).","Yellow Fortress — a short, steep walk up (paths hit ~45° in places, so a carrier beats a stroller) for the classic sunset view over the city; free, with a small café at the top. Get there before sunset if you want a seat.","Dinner: Buregdžinica Sač for burek — order sirnica (cheese) or zeljanica (spinach & cheese), not the meat version, with yogurt on the side. A Sarajevo institution, expect a short wait for a table."],
+   bullets:["Land Sarajevo 11:55, clear immigration/baggage and pick up the rental car (allow ~1–1.5hrs) — realistically at the hotel by early-mid afternoon.","Check in, let the little one decompress, then an easy afternoon wandering Baščaršija (Old Bazaar) rather than a packed sightseeing list — save the big history stops for Day 2.","Yellow Fortress — a short, steep walk up (paths hit ~45° in places, so a carrier beats a stroller) for the classic sunset view over the city; free, with a small café at the top. Get there before sunset if you want a seat.","Dinner: Buregdžinica Sač for burek — order sirnica (cheese) or zeljanica (spinach & cheese), not the meat version, with yogurt on the side. A Sarajevo institution, expect a short wait for a table."],
    lat:43.8598071,lng:18.4312914,cid:"16792411884729425931",
    photos:[{url:"https://lh3.googleusercontent.com/place-photos/AG9NLjCaseePsYnQ2nxHcWKVc8bVqEFvmO9NVjY5W-jd7xzZ5JWrOMslfmq69ChLZM8JYGQJeZDcRcNAM4vyHy_H5AYsUWtO6Zjq2rf_jxBaeiXE2brLEE0A2tpfTNFQKphF2l9kh0pAZA9ePCc_hg=w700-h500",caption:"Baščaršija, Sarajevo Old Town"},{url:"https://lh3.googleusercontent.com/place-photos/AG9NLjB5YLH-kdN6Snv8CpjZi826kyCDuYtl89uaWyijm08hCYU0vTR6qpbYl3HVWLIlcepmAUd61bThhG42U47MELK3-MjU9CLnNn3JcmnwIebuoaphm54jQU4DxP_Tnf4Da38r0PoPjtHmjmlyUdc=w700-h500",caption:"Yellow Fortress, sunset over Sarajevo"}],
    parking:[{label:"Underground Garage, city centre",placeId:"ChIJt9_oUgDJWEcRQaTCGc6gc-M"}],
@@ -377,10 +393,11 @@ const DAYS = [
    lat:46.4925762,lng:13.7377588,cid:"13886851757976624053",route:FULL_ROUTE.concat([ZELENCI]),
    photos:[{url:"https://lh3.googleusercontent.com/place-photos/AG9NLjB_OT1z50t2p2t1unNmOGyzo5p1gOZRk5vOMCBHEn5ylnYlTDWID8W76DY3SE3lyLZg0KCjFhVVGNqLnuvzxr_APjlSDC8R9v5sYvaLwG08nYN8y-mA9WPsy0XYE8JhwaE_FBr4na6lkW6t6A=w700-h500",caption:"Zelenci Nature Reserve"},{url:"https://lh3.googleusercontent.com/place-photos/AJRVUZPCAOwm9mVLnwphQiTRuNLddKQD8mQIwAOzvUgtP1zndnp9ZUImo6uOyIZWQx2IJ50AfTUmjCGanbh5Ah-kHdwt-MRgQdL_5si87Q-UIdxe0UWhiN1AXeObbznkgd11gklbYGvdpHuQpxGLSQ=w700-h500",caption:"Lake Jasna"}],
    parking:[{label:"Zelenci Parking (free)",placeId:"ChIJZ6DzDwB7ekcR45WQZ2ap9hc"},{label:"Jasna Parking (paid, ~€3/hr)",placeId:"ChIJ1bAY1Mh9ekcR9MMnxJFcSrM"}]},
-  {n:12,date:"Tue 1 Sep",leg:"slovenia",icon:"🏁",title:"Ljubljana Morning & Depart",
-   bullets:["Relaxed morning in Ljubljana before the flight — Triple Bridge, Dragon Bridge, a wander through the central market, riverside café.","Tivoli Park or the Nebotičnik rooftop terrace if there's time to spare.","Drop off the car, fly home."],
+  {n:12,date:"Tue 1 Sep",leg:"slovenia",icon:"🏁",title:"Full Day in Ljubljana & Depart",
+   bullets:["Flight isn't until 18:30, so this is a proper last day, not just a rushed morning. Check out, leave bags in the car or ask the hotel to hold them.","Ljubljana Castle funicular, Triple Bridge, Dragon Bridge, a wander through the central market.","Riverside lunch — Lolita again, or anywhere along the river.","Tivoli Park or the Nebotičnik rooftop terrace for a last view over the city.","Head to the airport by ~4–4:30pm to be safe for an international flight (car drop-off + ~25–30min transfer + check-in)."],
    lat:46.047677,lng:14.515132,cid:"5002083871361299812",
    parking:[{label:"Kongresni trg Garage (centre)",placeId:"ChIJj_SSYWEtZUcR3RvMnMR_TWI"}],
+   eat:[{label:"Lolita (riverside café, kremna rezina)",placeId:"ChIJBd5ApWMtZUcRl3Af0EF8ZHs"}],
    photos:[{url:"https://lh3.googleusercontent.com/place-photos/AG9NLjC5s8hC3dZFQKLlVGL64xkNdyju5BLysU6jlvtR3Jxmpxd3D7uLzUt7ofg3xk7JNOXTux9YVlKks22bqDmXhGRaqnpFcxbDJJ_AH5io5KXuhZx14PxW22I0kzdIR7qTOjV1Ig8IqUYq1BBRfvhVjjmTjg=w700-h500",caption:"Triple Bridge, Ljubljana"}]}
 ];
 
